@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+<title>Danh sách Category</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h2>Danh sách Category</h2>
+			<a th:href="@{/categories/new}" class="btn btn-primary">+ Thêm
+				Category</a>
+		</div>
+
+		<form th:action="@{/categories}" method="get" class="d-flex mb-3">
+			<input type="text" name="keyword" th:value="${keyword}"
+				placeholder="Tìm kiếm..." class="form-control me-2">
+			<button type="submit" class="btn btn-outline-success">Search</button>
+		</form>
+
+		<table class="table table-bordered table-striped">
+			<thead class="table-dark">
+				<tr>
+					<th>ID</th>
+					<th>Tên</th>
+					<th>Mô tả</th>
+					<th width="180px">Hành động</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cat : ${categories}">
+					<td th:text="${cat.id}"></td>
+					<td th:text="${cat.name}"></td>
+					<td th:text="${cat.description}"></td>
+					<td><a th:href="@{'/categories/edit/' + ${cat.id}}"
+						class="btn btn-sm btn-warning">Sửa</a> <a
+						th:href="@{'/categories/delete/' + ${cat.id}}"
+						onclick="return confirm('Bạn chắc muốn xóa?')"
+						class="btn btn-sm btn-danger">Xóa</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>
