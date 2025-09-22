@@ -61,7 +61,9 @@ public class ProductApiController {
 			ex.setName(req.getName());
 			ex.setPrice(req.getPrice());
 			ex.setCategory(cat);
-			return ResponseEntity.ok(productRepo.save(ex));
+			// return ResponseEntity.ok(productRepo.save(ex));
+			  productRepo.save(ex); 
+			return ResponseEntity.noContent().build(); // 204, không serialize Product
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
